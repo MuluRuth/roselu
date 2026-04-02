@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>rosèlu | Track Your Delivery</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="roselu.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#bd0050','primary-dim':'#a70046','primary-container':'#ffa9b9','on-primary':'#fff7f7',tertiary:'#8d34b4','on-tertiary':'#fff7fc'},fontFamily:{headline:['Noto Serif']},borderRadius:{DEFAULT:'1rem',lg:'2rem',xl:'3rem',full:'9999px'}}}}</script>
+<style>
+  @keyframes riderMove {
+    0%   { left: 8%;  top: 72%; }
+    20%  { left: 22%; top: 65%; }
+    40%  { left: 38%; top: 55%; }
+    60%  { left: 52%; top: 48%; }
+    80%  { left: 65%; top: 40%; }
+    100% { left: 75%; top: 35%; }
+  }
+  @keyframes ping { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.6);opacity:0;} }
+  @keyframes progress { from{width:0;} to{width:var(--pct);} }
+  .rider { animation: riderMove 8s ease-in-out infinite alternate; position: absolute; }
+  .ping-ring { animation: ping 1.2s ease-in-out infinite; }
+  .road { stroke-dasharray: 6 4; }
+  .step-done .step-icon { background: var(--primary) !important; color: var(--on-primary) !important; }
+  .step-done .step-line { background: var(--primary) !important; }
+  .step-active .step-icon { background: var(--tertiary) !important; color: var(--on-tertiary) !important; box-shadow: 0 0 0 4px rgba(141,52,180,0.2); }
+</style>
+</head>
+<body class="bg-[var(--bg)] text-[var(--on-surface)]">
+<nav class="fixed top-0 w-full z-50 bg-[var(--bg)]/80 backdrop-blur-xl shadow-sm">
+  <div class="flex justify-between items-center px-6 md:px-10 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="hl text-3xl font-black italic text-[var(--primary)] tracking-tighter">rosèlu</a>
+    <div class="flex items-center gap-3">
+      <button onclick="DarkMode.toggle()" class="w-9 h-9 rounded-full bg-[var(--surface-low)] flex items-center justify-center"><span class="material-symbols-outlined dark-toggle-icon text-sm">dark_mode</span></button>
+      <a href="catalog.html" class="text-[10px] uppercase tracking-widest font-bold text-[var(--on-surface-muted)] hover:text-[var(--primary)] transition-colors">Continue Shopping</a>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-32 pb-20 px-6 md:px-10 max-w-6xl mx-auto">
+  <div class="mb-10 fade-up">
+    <p class="text-[11px] uppercase tracking-[0.25em] font-bold text-[var(--tertiary)] mb-2">Order #RS-8821</p>
+    <h1 class="hl text-5xl md:text-7xl font-black italic text-[var(--primary)] leading-none">Track Delivery</h1>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+    <!-- Map -->
+    <div class="lg:col-span-7 fade-up">
+      <div class="relative bg-[var(--surface-low)] rounded-3xl overflow-hidden" style="height:420px;">
+        <!-- Nairobi illustrated map SVG -->
+        <svg viewBox="0 0 500 360" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background -->
+          <rect width="500" height="360" fill="var(--surface-low)"/>
+          <!-- Green areas / parks -->
+          <ellipse cx="180" cy="200" rx="60" ry="35" fill="#dcf5e7" opacity="0.6"/>
+          <ellipse cx="320" cy="260" rx="45" ry="25" fill="#dcf5e7" opacity="0.5"/>
+          <rect x="60" y="80" width="80" height="50" rx="8" fill="#dcf5e7" opacity="0.4"/>
+          <!-- Roads -->
+          <line x1="0" y1="180" x2="500" y2="160" stroke="#c8a8a9" stroke-width="3" class="road"/>
+          <line x1="250" y1="0" x2="220" y2="360" stroke="#c8a8a9" stroke-width="3" class="road"/>
+          <line x1="0" y1="280" x2="500" y2="240" stroke="#c8a8a9" stroke-width="2" class="road"/>
+          <line x1="150" y1="0" x2="120" y2="360" stroke="#c8a8a9" stroke-width="2" class="road"/>
+          <line x1="350" y1="0" x2="380" y2="360" stroke="#c8a8a9" stroke-width="2" class="road"/>
+          <!-- Route line -->
+          <polyline points="45,260 110,235 190,198 260,172 325,144 375,126" stroke="var(--primary)" stroke-width="3" fill="none" stroke-dasharray="8 5" opacity="0.7"/>
+          <!-- Destination pin -->
+          <circle cx="375" cy="126" r="12" fill="var(--primary)" opacity="0.2"/>
+          <circle cx="375" cy="126" r="6" fill="var(--primary)"/>
+          <!-- Origin pin -->
+          <circle cx="45" cy="260" r="8" fill="var(--tertiary)" opacity="0.3"/>
+          <circle cx="45" cy="260" r="4" fill="var(--tertiary)"/>
+          <!-- Landmark labels -->
+          <text x="170" y="215" font-family="'Plus Jakarta Sans'" font-size="9" fill="var(--on-surface-muted)" opacity="0.6">Uhuru Park</text>
+          <text x="310" y="272" font-family="'Plus Jakarta Sans'" font-size="9" fill="var(--on-surface-muted)" opacity="0.6">Lang'ata</text>
+          <text x="62" y="76" font-family="'Plus Jakarta Sans'" font-size="9" fill="var(--on-surface-muted)" opacity="0.6">Westlands</text>
+          <text x="340" y="122" font-family="'Plus Jakarta Sans'" font-size="9" fill="var(--primary)" font-weight="bold">You are here</text>
+          <text x="15" y="275" font-family="'Plus Jakarta Sans'" font-size="9" fill="var(--tertiary)" font-weight="bold">Rosèlu Studio</text>
+          <text x="185" y="155" font-family="'Plus Jakarta Sans'" font-size="9" fill="var(--on-surface-muted)" opacity="0.6">CBD</text>
+        </svg>
+
+        <!-- Animated rider -->
+        <div class="rider flex flex-col items-center" style="left:8%;top:72%;">
+          <div class="relative">
+            <div class="ping-ring absolute inset-0 w-10 h-10 rounded-full border-2 border-[var(--primary)] -m-1"></div>
+            <div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center shadow-lg">
+              <span class="material-symbols-outlined text-white text-sm" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">electric_moped</span>
+            </div>
+          </div>
+          <div class="mt-1 bg-[var(--primary)] text-[var(--on-primary)] px-2 py-0.5 rounded-full text-[9px] font-bold whitespace-nowrap shadow-md">Brian · Bodaboda</div>
+        </div>
+
+        <!-- ETA badge -->
+        <div class="absolute top-4 right-4 bg-white dark:bg-[var(--surface-mid)] rounded-2xl p-4 shadow-xl">
+          <p class="text-[10px] uppercase tracking-widest font-bold text-[var(--on-surface-muted)] mb-1">Estimated Arrival</p>
+          <p class="hl text-3xl font-black text-[var(--primary)]" id="eta-time">23 min</p>
+          <p class="text-xs text-[var(--on-surface-muted)]">Kilimani · Lavington</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status panel -->
+    <div class="lg:col-span-5 space-y-6 fade-up-2">
+      <!-- Order card -->
+      <div class="bg-white dark:bg-[var(--surface-mid)] rounded-2xl p-6 border border-[var(--outline-variant)]/20 flex gap-4">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMnpYEG0EvCbYDS5aeHiA1XcZDkhgevN6XJeF06uaZf6uBHIHbT0uGd6dn6cY6e36T4qHwad7EGbGQZZRIWNT2qwwMJNKZxGAUSfd3mBT-6ZhKH3q6nF3sAAEeJ3xnLJC5QSvZqmsrCHArfL_TabN3H12UhsL7_xvv94g4XBQNN3vVK_Pkq0ef_txUw3lgXk91Y5NlmyWhxigNK9rBCV3MnugifFImJMmuo7VX4aN2-0nePbs-niq6KTzaAOuexugMgzyIF9jNMMl0" class="w-20 h-24 object-cover rounded-xl flex-shrink-0" alt="Blossom Pink"/>
+        <div>
+          <h3 class="font-bold text-[var(--on-surface)] mb-1">Blossom Pink</h3>
+          <p class="text-xs text-[var(--on-surface-muted)] mb-2">Vintage Series · Pink</p>
+          <p class="font-bold text-[var(--primary)]">KSh 14,500</p>
+          <p class="text-[10px] text-[var(--on-surface-muted)] mt-1 uppercase tracking-wider">Order #RS-8821</p>
+        </div>
+      </div>
+
+      <!-- Progress steps -->
+      <div class="bg-white dark:bg-[var(--surface-mid)] rounded-2xl p-6 border border-[var(--outline-variant)]/20">
+        <h3 class="font-bold text-[var(--on-surface)] mb-6 text-sm uppercase tracking-widest">Delivery Status</h3>
+        <div class="space-y-0" id="steps">
+          <!-- Steps rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Rider info -->
+      <div class="bg-[var(--primary)] text-[var(--on-primary)] rounded-2xl p-6 flex items-center gap-4">
+        <div class="w-14 h-14 rounded-full bg-[var(--on-primary)]/20 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-2xl">person</span>
+        </div>
+        <div class="flex-1">
+          <p class="text-[10px] uppercase tracking-widest opacity-70 mb-1">Your Rider</p>
+          <p class="font-bold text-lg">Brian Kamau</p>
+          <p class="text-sm opacity-80">Bodaboda Express · Nairobi</p>
+        </div>
+        <a href="tel:+254700000000" class="w-12 h-12 rounded-full bg-[var(--on-primary)]/20 flex items-center justify-center hover:bg-[var(--on-primary)]/30 transition-colors">
+          <span class="material-symbols-outlined">call</span>
+        </a>
+      </div>
+
+      <a href="catalog.html" class="w-full border border-[var(--outline-variant)]/40 text-[var(--on-surface)] py-4 rounded-full font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2 hover:bg-[var(--surface-low)] transition-colors">
+        <span class="material-symbols-outlined text-sm">arrow_back</span> Continue Shopping
+      </a>
+    </div>
+  </div>
+</main>
+
+<script src="roselu.js"></script>
+<script>
+const steps = [
+  { label: 'Order Confirmed', sub: 'M-Pesa payment received', time: '2:14 PM', done: true },
+  { label: 'Preparing Order', sub: 'Cleaning & packaging your frames', time: '2:18 PM', done: true },
+  { label: 'Rider Assigned', sub: 'Brian is on his way to pick up', time: '2:25 PM', done: true },
+  { label: 'Out for Delivery', sub: 'Brian is heading to Kilimani', time: '2:31 PM', active: true },
+  { label: 'Delivered', sub: 'Enjoy your rosèlu frames!', time: '~2:55 PM', done: false },
+];
+
+const container = document.getElementById('steps');
+steps.forEach((s, i) => {
+  const isLast = i === steps.length - 1;
+  container.innerHTML += `
+    <div class="flex gap-4 ${isLast ? '' : 'pb-6'}">
+      <div class="flex flex-col items-center">
+        <div class="step-icon w-9 h-9 rounded-full flex items-center justify-center text-sm flex-shrink-0 ${s.done ? 'step-done' : ''} ${s.active ? 'step-active' : ''}" style="background:var(--surface-low);color:var(--on-surface-muted);">
+          ${s.done ? '<span class="material-symbols-outlined text-sm" style="font-variation-settings:\'FILL\' 1,\'wght\' 400,\'GRAD\' 0,\'opsz\' 24">check</span>' : s.active ? '<span class="material-symbols-outlined text-sm" style="animation:ping 1.2s ease-in-out infinite">electric_moped</span>' : '<span style="width:8px;height:8px;border-radius:50%;background:var(--outline-variant);display:block;"></span>'}
+        </div>
+        ${!isLast ? `<div class="step-line w-0.5 flex-1 mt-1 ${s.done ? '' : ''}" style="background:var(--outline-variant);min-height:24px;${s.done ? 'background:var(--primary);' : ''}"></div>` : ''}
+      </div>
+      <div class="pb-1 ${s.active ? 'font-bold' : ''}">
+        <p class="text-sm font-bold text-[var(--on-surface)] ${!s.done && !s.active ? 'opacity-40' : ''}">${s.label}</p>
+        <p class="text-xs text-[var(--on-surface-muted)] ${!s.done && !s.active ? 'opacity-40' : ''}">${s.sub}</p>
+        <p class="text-[10px] text-[var(--on-surface-muted)] mt-1 ${!s.done && !s.active ? 'opacity-30' : ''}">${s.time}</p>
+      </div>
+    </div>`;
+});
+
+// Countdown timer
+let mins = 23;
+setInterval(() => {
+  if (mins > 1) { mins--; document.getElementById('eta-time').textContent = mins + ' min'; }
+}, 60000);
+</script>
+</body>
+</html>

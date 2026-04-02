@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>rosèlu | Asante! Order Confirmed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:"#bd0050","primary-dim":"#a70046","primary-container":"#ffa9b9","on-primary":"#fff7f7","on-primary-container":"#7d0032",secondary:"#974362","secondary-container":"#ffd9e2","on-secondary":"#fff7f7",tertiary:"#8d34b4","tertiary-container":"#e49eff","on-tertiary":"#fff7fc",background:"#fff8f7",surface:"#fff8f7","surface-container-lowest":"#ffffff","surface-container-low":"#fff0f0","surface-container":"#ffe9e8","surface-container-high":"#ffe1e1","surface-container-highest":"#ffdad9","on-surface":"#532426","on-surface-variant":"#884f51","on-background":"#532426",outline:"#a86a6b","outline-variant":"#e6a0a1"},fontFamily:{headline:["Noto Serif"],body:["Plus Jakarta Sans"],label:["Plus Jakarta Sans"]},borderRadius:{DEFAULT:"1rem",lg:"2rem",xl:"3rem",full:"9999px"}}}}
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff8f7;color:#532426;}
+  .hl{font-family:'Noto Serif',serif;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes checkPop{0%{transform:scale(0) rotate(-10deg);}70%{transform:scale(1.15) rotate(3deg);}100%{transform:scale(1) rotate(0);}  }
+  @keyframes confetti{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(120px) rotate(360deg);opacity:0;}}
+  .fade-up-1{animation:fadeUp 0.7s 0.1s ease both;}
+  .fade-up-2{animation:fadeUp 0.7s 0.3s ease both;}
+  .fade-up-3{animation:fadeUp 0.7s 0.5s ease both;}
+  .check-pop{animation:checkPop 0.6s 0.2s ease both;}
+  .confetti-dot{position:absolute;width:8px;height:8px;border-radius:50%;animation:confetti 2s ease forwards;}
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Nav -->
+<header class="fixed top-0 w-full z-50 bg-[#fff8f7]/80 backdrop-blur-xl shadow-sm shadow-[#532426]/5">
+  <div class="flex justify-between items-center px-6 md:px-10 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="text-3xl font-black italic text-primary tracking-tighter hl">rosèlu</a>
+    <div class="flex items-center gap-3">
+      <span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Order Confirmed</span>
+      <span class="material-symbols-outlined text-[#00a651] text-lg" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">check_circle</span>
+    </div>
+  </div>
+</header>
+
+<main class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+    <!-- Visual -->
+    <div class="lg:col-span-5 relative fade-up-1">
+      <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-[#532426]/10 relative transform -rotate-1">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDq8tiSIvM498XxW1bSd0SVezKVU2l5ViEhX9jZBE6uS7qsfP-9BGm9qtMK8yBmdyo9IlXSH1Ph-X8_Mf6Jt5t1N66NYDs8F9gvFLgyLarprBHsAdSYyCJrx3WT86-iTZvJLW8EfOuEJnLWHtNlk7SU9kjXNhdPpeZAYgoNz9y_jdWm83tnxkcwZ3STd_YRrqKEQ74683ZM_xClg5tlpZGZp4l1rm-FHuFmS82zFOVvZIO-k0rCwi9E4D-PQofBeNvMZNWnfgko_0F" class="w-full h-full object-cover" alt="Happy customer"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent"></div>
+      </div>
+
+      <!-- M-Pesa badge -->
+      <div class="check-pop absolute -bottom-6 -right-4 md:-right-8 bg-tertiary text-on-tertiary p-6 rounded-2xl shadow-2xl transform rotate-3 flex flex-col items-center">
+        <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">check_circle</span>
+        <p class="hl italic text-sm mt-2 font-bold">Paid via M-PESA</p>
+      </div>
+
+      <!-- Confetti dots -->
+      <div id="confetti-container"></div>
+    </div>
+
+    <!-- Details -->
+    <div class="lg:col-span-7 space-y-8 md:pl-6">
+      <div class="fade-up-1">
+        <p class="text-[11px] uppercase tracking-[0.25em] font-bold text-tertiary mb-3">Payment Successful</p>
+        <h1 class="hl text-7xl md:text-8xl font-black italic text-primary leading-none mb-3">Asante!</h1>
+        <p class="text-xl text-on-surface-variant font-light">Your order is confirmed and on its way.</p>
+      </div>
+
+      <!-- Order info -->
+      <div class="fade-up-2 grid gap-4">
+        <div class="p-6 bg-surface-container-low rounded-2xl flex justify-between items-end">
+          <div>
+            <p class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-1">Order Reference</p>
+            <p class="hl text-3xl font-bold text-on-surface">#RS-8821</p>
+          </div>
+          <div class="text-right">
+            <p class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-1">Amount Paid</p>
+            <p class="hl text-3xl italic font-bold text-on-surface">KSh 14,850</p>
+          </div>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-outline-variant/20 flex gap-5 items-start">
+          <div class="bg-primary-container/30 p-3 rounded-full">
+            <span class="material-symbols-outlined text-primary">moped</span>
+          </div>
+          <div>
+            <p class="font-bold text-on-surface mb-1">Bodaboda Delivery</p>
+            <p class="text-sm text-on-surface-variant leading-relaxed">
+              Your rider is heading to <span class="text-primary font-bold">Kilimani / Lavington</span>. Estimated arrival: <span class="font-bold text-on-surface">30–45 minutes</span>.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-6 bg-[#00a651]/5 rounded-2xl border border-[#00a651]/20 flex gap-5 items-start">
+          <div class="w-10 h-10 rounded-xl flex-shrink-0 bg-white flex items-center justify-center shadow-sm">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6-10tzj3wLT-DD8J65qDgbTZX9Zs-Bk5uJIWVYSnbKmNo1X-GReSTijR_k_TXT8N7umuj_a44BU303KxuZXY7muYcaDJKVd7FcK5ZZyPJtMAAcrn5zglbkqX8UXtpYeA4sYT5K4vMcSkNHJIYmmrgnNVqC2AEyEQLUJSURQU_MDeAgYaRu7Rp8IFww8uPA__6-1-eKUFGOuWgXf0Z4-WM75yL8Vv7MEjXugVH42U034O1vhb8_1Fo8hwr4FNRAWcX4R_qNsPBdUL-" class="w-7 h-7 object-contain" alt="M-Pesa"/>
+          </div>
+          <div>
+            <p class="font-bold text-[#00a651] mb-1">M-Pesa Payment Received</p>
+            <p class="text-sm text-on-surface-variant">Transaction confirmed. You will receive an SMS confirmation from M-Pesa shortly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="fade-up-3 flex flex-col sm:flex-row gap-4">
+        <a href="catalog.html" class="flex items-center justify-center gap-3 bg-primary text-on-primary px-8 py-4 rounded-full font-bold tracking-wide shadow-lg hover:bg-primary-dim hover:scale-[1.02] transition-all group">
+          <span>Continue Shopping</span>
+          <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
+        <button class="border border-outline/20 text-on-surface px-8 py-4 rounded-full font-bold hover:bg-surface-container-low transition-colors">
+          Track Delivery
+        </button>
+      </div>
+
+      <p class="fade-up-3 text-[10px] uppercase tracking-[0.2em] text-outline">Curated with love in Nairobi · rosèlu Atelier 2024</p>
+    </div>
+  </div>
+</main>
+
+<!-- Mobile bottom nav -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-8 pb-6 pt-3 bg-[#fff8f7]/90 backdrop-blur-2xl rounded-t-3xl shadow-[0_-6px_30px_rgba(83,36,38,0.08)] z-50">
+  <a href="index.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+    <span class="material-symbols-outlined">storefront</span>
+    <span class="text-[9px] uppercase tracking-widest font-bold">Shop</span>
+  </a>
+  <a href="catalog.html" class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+    <span class="material-symbols-outlined">auto_awesome</span>
+    <span class="text-[9px] uppercase tracking-widest font-bold">Catalog</span>
+  </a>
+  <div class="flex flex-col items-center bg-primary text-on-primary rounded-full p-3 -translate-y-3 shadow-lg">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">shopping_basket</span>
+  </div>
+  <div class="flex flex-col items-center gap-1 text-on-surface-variant">
+    <span class="material-symbols-outlined">account_circle</span>
+    <span class="text-[9px] uppercase tracking-widest font-bold">Profile</span>
+  </div>
+</nav>
+
+<footer class="bg-surface-container-low rounded-t-3xl mt-16 mb-20 md:mb-0">
+  <div class="max-w-7xl mx-auto px-10 py-12 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="hl text-xl italic font-bold text-primary">rosèlu</div>
+    <p class="text-[10px] uppercase tracking-widest text-on-surface-variant">© 2024 rosèlu. Handcrafted in Nairobi.</p>
+    <div class="flex gap-6 text-[10px] uppercase tracking-widest text-on-surface-variant">
+      <a href="#" class="hover:text-tertiary transition-colors">Privacy</a>
+      <a href="#" class="hover:text-tertiary transition-colors">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Confetti
+const colors = ['#bd0050','#8d34b4','#ffa9b9','#e49eff','#532426'];
+const container = document.getElementById('confetti-container');
+for (let i = 0; i < 20; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'confetti-dot';
+  dot.style.cssText = `background:${colors[i%5]};left:${Math.random()*100}%;top:${-10+Math.random()*-40}px;animation-delay:${Math.random()*1.5}s;animation-duration:${1.5+Math.random()*1.5}s;`;
+  container.appendChild(dot);
+}
+</script>
+</body>
+</html>

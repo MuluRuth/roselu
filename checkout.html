@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>rosèlu | Checkout</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:"#bd0050","primary-dim":"#a70046","primary-container":"#ffa9b9","on-primary":"#fff7f7","on-primary-container":"#7d0032",secondary:"#974362","secondary-container":"#ffd9e2","on-secondary":"#fff7f7",tertiary:"#8d34b4","tertiary-container":"#e49eff","on-tertiary":"#fff7fc",background:"#fff8f7",surface:"#fff8f7","surface-container-lowest":"#ffffff","surface-container-low":"#fff0f0","surface-container":"#ffe9e8","surface-container-high":"#ffe1e1","surface-container-highest":"#ffdad9","on-surface":"#532426","on-surface-variant":"#884f51","on-background":"#532426",outline:"#a86a6b","outline-variant":"#e6a0a1"},fontFamily:{headline:["Noto Serif"],body:["Plus Jakarta Sans"],label:["Plus Jakarta Sans"]},borderRadius:{DEFAULT:"1rem",lg:"2rem",xl:"3rem",full:"9999px"}}}}
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff8f7;color:#532426;}
+  .hl{font-family:'Noto Serif',serif;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .spinner{animation:spin 0.8s linear infinite;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;width:20px;height:20px;}
+  .pulse{animation:pulse 1.5s ease-in-out infinite;}
+  .fade-up{animation:fadeUp 0.6s ease forwards;}
+  #mpesa-overlay{display:none;}
+  #mpesa-overlay.show{display:flex;}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<header class="fixed top-0 w-full z-50 bg-[#fff8f7]/80 backdrop-blur-xl shadow-sm shadow-[#532426]/5">
+  <div class="flex justify-between items-center px-6 md:px-10 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="text-3xl font-black italic text-primary tracking-tighter hl">rosèlu</a>
+    <div class="flex items-center gap-3">
+      <span class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Secure Checkout</span>
+      <span class="material-symbols-outlined text-primary text-lg">lock</span>
+    </div>
+  </div>
+</header>
+
+<!-- M-Pesa Waiting Overlay -->
+<div id="mpesa-overlay" class="fixed inset-0 z-50 bg-[#532426]/80 backdrop-blur-sm flex items-center justify-center">
+  <div class="bg-white rounded-3xl p-10 max-w-sm w-full mx-4 text-center shadow-2xl fade-up">
+    <div class="w-16 h-16 rounded-full bg-[#00a651]/10 flex items-center justify-center mx-auto mb-6">
+      <span class="material-symbols-outlined text-[#00a651] text-3xl pulse">phone_android</span>
+    </div>
+    <h3 class="hl text-2xl font-bold text-on-surface mb-3">Check your phone</h3>
+    <p class="text-on-surface-variant text-sm leading-relaxed mb-6">An M-Pesa STK push has been sent to <span id="overlay-phone" class="font-bold text-on-surface">+254 7XX XXX XXX</span>. Enter your M-Pesa PIN to complete payment.</p>
+    <div class="flex items-center justify-center gap-3 bg-surface-container-low rounded-full py-3 px-6 mb-6">
+      <div class="spinner"></div>
+      <span class="text-sm font-bold text-on-surface-variant">Waiting for payment...</span>
+    </div>
+    <p class="text-xs text-on-surface-variant mb-4">Amount: <span class="font-bold text-on-surface">KSh 14,850</span></p>
+    <button onclick="cancelPayment()" class="text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors font-bold border-b border-on-surface-variant/20 pb-1">Cancel</button>
+  </div>
+</div>
+
+<main class="pt-32 pb-20 px-6 md:px-10 max-w-7xl mx-auto">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-14">
+
+    <!-- Left: Form -->
+    <div class="lg:col-span-7 space-y-12 fade-up">
+
+      <!-- Step indicator -->
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-primary text-on-primary text-xs font-bold flex items-center justify-center">1</div>
+          <span class="text-xs font-bold uppercase tracking-wider">Shipping</span>
+        </div>
+        <div class="h-px flex-1 bg-outline-variant/30"></div>
+        <div class="flex items-center gap-2 opacity-40">
+          <div class="w-7 h-7 rounded-full border-2 border-outline text-xs font-bold flex items-center justify-center">2</div>
+          <span class="text-xs font-bold uppercase tracking-wider">Payment</span>
+        </div>
+        <div class="h-px flex-1 bg-outline-variant/30"></div>
+        <div class="flex items-center gap-2 opacity-40">
+          <div class="w-7 h-7 rounded-full border-2 border-outline text-xs font-bold flex items-center justify-center">3</div>
+          <span class="text-xs font-bold uppercase tracking-wider">Confirm</span>
+        </div>
+      </div>
+
+      <!-- Shipping -->
+      <section>
+        <h1 class="hl text-4xl font-light mb-8 text-on-surface">Shipping Details</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="space-y-2">
+            <label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">First Name</label>
+            <input class="w-full px-5 py-4 rounded-xl bg-surface-container-low border-none focus:ring-2 focus:ring-primary/30 outline-none transition-all placeholder:text-outline-variant/50" placeholder="Wanjiku" type="text"/>
+          </div>
+          <div class="space-y-2">
+            <label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Last Name</label>
+            <input class="w-full px-5 py-4 rounded-xl bg-surface-container-low border-none focus:ring-2 focus:ring-primary/30 outline-none transition-all placeholder:text-outline-variant/50" placeholder="Njoroge" type="text"/>
+          </div>
+          <div class="md:col-span-2 space-y-2">
+            <label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Delivery District (Nairobi)</label>
+            <select class="w-full px-5 py-4 rounded-xl bg-surface-container-low border-none focus:ring-2 focus:ring-primary/30 outline-none appearance-none text-on-surface">
+              <option>Kilimani / Lavington</option>
+              <option>Westlands / Parklands</option>
+              <option>Karen / Lang'ata</option>
+              <option>CBD / City Square</option>
+              <option>South C / South B</option>
+              <option>Gigiri / Runda</option>
+              <option>Other Nairobi Environs</option>
+            </select>
+          </div>
+          <div class="md:col-span-2 space-y-2">
+            <label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Apartment / Building / House No.</label>
+            <input class="w-full px-5 py-4 rounded-xl bg-surface-container-low border-none focus:ring-2 focus:ring-primary/30 outline-none transition-all placeholder:text-outline-variant/50" placeholder="The Rose Residences, Apt 4C" type="text"/>
+          </div>
+        </div>
+      </section>
+
+      <!-- Delivery Method -->
+      <section>
+        <h2 class="hl text-2xl font-light mb-6 text-on-surface">Delivery Method</h2>
+        <div class="grid gap-4">
+          <label class="flex items-center justify-between p-6 rounded-xl bg-white border-2 border-primary/20 cursor-pointer hover:border-primary/40 transition-all shadow-sm">
+            <div class="flex items-center gap-4">
+              <input checked class="text-primary focus:ring-primary w-5 h-5" name="shipping" type="radio"/>
+              <div>
+                <span class="block font-bold text-on-surface">Bodaboda Express</span>
+                <span class="block text-xs text-on-surface-variant">Same-day delivery within Nairobi</span>
+              </div>
+            </div>
+            <span class="font-bold text-primary italic">KSh 350</span>
+          </label>
+          <label class="flex items-center justify-between p-6 rounded-xl bg-surface-container-low opacity-50 cursor-not-allowed">
+            <div class="flex items-center gap-4">
+              <input disabled class="w-5 h-5" name="shipping" type="radio"/>
+              <div>
+                <span class="block font-bold text-on-surface">Standard Courier</span>
+                <span class="block text-xs text-on-surface-variant">2-3 business days</span>
+              </div>
+            </div>
+            <span class="font-bold text-on-surface-variant">KSh 200</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Payment -->
+      <section>
+        <h2 class="hl text-2xl font-light mb-6 text-on-surface">Payment Method</h2>
+        <div class="space-y-4">
+          <!-- M-Pesa Card -->
+          <div class="p-8 rounded-2xl bg-surface-container-highest/30 border-2 border-primary/20">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+              <div class="flex items-center gap-4">
+                <div class="w-16 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm overflow-hidden p-2">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6-10tzj3wLT-DD8J65qDgbTZX9Zs-Bk5uJIWVYSnbKmNo1X-GReSTijR_k_TXT8N7umuj_a44BU303KxuZXY7muYcaDJKVd7FcK5ZZyPJtMAAcrn5zglbkqX8UXtpYeA4sYT5K4vMcSkNHJIYmmrgnNVqC2AEyEQLUJSURQU_MDeAgYaRu7Rp8IFww8uPA__6-1-eKUFGOuWgXf0Z4-WM75yL8Vv7MEjXugVH42U034O1vhb8_1Fo8hwr4FNRAWcX4R_qNsPBdUL-" alt="M-Pesa" class="h-full w-full object-contain"/>
+                </div>
+                <div>
+                  <h3 class="font-bold text-on-surface">Lipa na M-PESA</h3>
+                  <p class="text-xs text-on-surface-variant">Instant STK Push to your Safaricom number</p>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label class="text-[9px] uppercase tracking-widest font-bold text-on-surface-variant">Safaricom Number</label>
+                <div class="flex gap-2">
+                  <div class="flex items-center bg-white px-3 py-3 rounded-xl text-sm font-bold shadow-sm">+254</div>
+                  <input id="phone-input" class="flex-1 md:w-44 px-4 py-3 rounded-xl bg-white border-none focus:ring-2 focus:ring-primary/30 outline-none text-sm shadow-sm" placeholder="712 345 678" type="tel" maxlength="9"/>
+                </div>
+              </div>
+            </div>
+            <button onclick="initiateMpesa()" id="pay-btn" class="w-full py-5 rounded-full bg-primary text-on-primary font-bold text-base tracking-tight shadow-xl shadow-primary/20 flex items-center justify-center gap-3 hover:bg-primary-dim hover:scale-[1.01] transition-all active:scale-95">
+              <span class="material-symbols-outlined">payments</span>
+              Pay KSh 14,850 with M-PESA
+            </button>
+            <p class="mt-4 text-[10px] text-center text-on-surface-variant/70 uppercase tracking-widest">You will receive an M-Pesa prompt on your phone</p>
+          </div>
+
+          <!-- Card option -->
+          <div class="p-5 rounded-xl bg-surface-container-low flex items-center justify-between cursor-pointer hover:bg-surface-container transition-colors group">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-on-surface-variant">credit_card</span>
+              <span class="font-medium text-on-surface">Card Payment</span>
+            </div>
+            <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right: Order Summary -->
+    <div class="lg:col-span-5 fade-up">
+      <div class="sticky top-32 p-8 rounded-3xl bg-surface-container shadow-xl shadow-[#532426]/5">
+        <h3 class="hl text-2xl mb-8">Your Curated Order</h3>
+        <div class="space-y-5 mb-8">
+          <div class="flex gap-4">
+            <div class="relative w-20 h-24 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container-low">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMnpYEG0EvCbYDS5aeHiA1XcZDkhgevN6XJeF06uaZf6uBHIHbT0uGd6dn6cY6e36T4qHwad7EGbGQZZRIWNT2qwwMJNKZxGAUSfd3mBT-6ZhKH3q6nF3sAAEeJ3xnLJC5QSvZqmsrCHArfL_TabN3H12UhsL7_xvv94g4XBQNN3vVK_Pkq0ef_txUw3lgXk91Y5NlmyWhxigNK9rBCV3MnugifFImJMmuo7VX4aN2-0nePbs-niq6KTzaAOuexugMgzyIF9jNMMl0" class="w-full h-full object-cover" alt="Blossom Pink"/>
+              <div class="absolute top-1 right-1 bg-tertiary text-on-tertiary text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">1</div>
+            </div>
+            <div class="flex flex-col justify-center flex-1">
+              <h4 class="font-bold text-on-surface text-sm">Blossom Pink</h4>
+              <p class="text-xs text-on-surface-variant">Vintage Series · Pink</p>
+              <p class="mt-1 font-bold text-primary">KSh 14,500</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Promo code -->
+        <div class="flex gap-2 mb-8">
+          <input class="flex-1 px-4 py-3 rounded-xl bg-surface-container-low border-none focus:ring-2 focus:ring-primary/20 outline-none text-sm placeholder:text-outline-variant/50" placeholder="Promo code" type="text"/>
+          <button class="px-5 py-3 rounded-xl bg-on-surface text-white text-xs font-bold uppercase tracking-widest hover:bg-primary transition-colors">Apply</button>
+        </div>
+
+        <div class="space-y-3 pt-6 border-t border-outline-variant/20">
+          <div class="flex justify-between text-sm text-on-surface-variant">
+            <span>Subtotal</span><span>KSh 14,500</span>
+          </div>
+          <div class="flex justify-between text-sm text-on-surface-variant">
+            <span>Bodaboda Delivery</span><span>KSh 350</span>
+          </div>
+          <div class="flex justify-between text-sm text-on-surface-variant">
+            <span>Taxes</span><span>Included</span>
+          </div>
+          <div class="flex justify-between items-end pt-4 border-t border-outline-variant/20">
+            <span class="text-[10px] uppercase tracking-widest font-bold">Total</span>
+            <span class="hl text-3xl font-bold text-on-surface">KSh 14,850</span>
+          </div>
+        </div>
+
+        <div class="mt-8 p-4 rounded-2xl bg-white/50 flex gap-3 items-start">
+          <span class="material-symbols-outlined text-tertiary text-lg">auto_awesome</span>
+          <p class="text-[11px] text-on-surface-variant leading-relaxed">Every rosèlu piece is sanitized and packed in our signature sustainable garment bags before dispatch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-surface-container-low rounded-t-3xl mt-10">
+  <div class="max-w-7xl mx-auto px-10 py-10 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="hl text-xl italic font-bold text-primary">rosèlu</div>
+    <p class="text-[10px] uppercase tracking-widest text-on-surface-variant">© 2024 rosèlu. Handcrafted in Nairobi.</p>
+  </div>
+</footer>
+
+<script>
+function initiateMpesa() {
+  const phone = document.getElementById('phone-input').value.replace(/\s/g,'');
+  if (phone.length < 9) { alert('Please enter a valid Safaricom number'); return; }
+  document.getElementById('overlay-phone').textContent = '+254 ' + phone;
+  document.getElementById('mpesa-overlay').classList.add('show');
+  // Simulate waiting then redirect to confirmation
+  setTimeout(() => { window.location.href = 'confirmation.html'; }, 4000);
+}
+function cancelPayment() {
+  document.getElementById('mpesa-overlay').classList.remove('show');
+}
+</script>
+</body>
+</html>

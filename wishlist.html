@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>rosèlu | Wishlist</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="roselu.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>tailwind.config={darkMode:'class',theme:{extend:{colors:{primary:'#bd0050','primary-dim':'#a70046','primary-container':'#ffa9b9','on-primary':'#fff7f7',tertiary:'#8d34b4','tertiary-container':'#e49eff','on-tertiary':'#fff7fc',background:'#fff8f7','surface-container-low':'#fff0f0','surface-container':'#ffe9e8','on-surface':'#532426','on-surface-variant':'#884f51','outline-variant':'#e6a0a1'},fontFamily:{headline:['Noto Serif']},borderRadius:{DEFAULT:'1rem',lg:'2rem',xl:'3rem',full:'9999px'}}}}</script>
+</head>
+<body class="bg-[var(--bg)] text-[var(--on-surface)]">
+<div id="drawer-overlay" onclick="Cart.closeDrawer()"></div>
+<div id="cart-drawer">
+  <div class="flex items-center justify-between px-6 py-5 border-b border-[var(--outline-variant)]/20">
+    <h2 class="hl text-2xl font-bold">Your Cart</h2>
+    <button onclick="Cart.closeDrawer()" class="w-9 h-9 rounded-full bg-[var(--surface-low)] flex items-center justify-center"><span class="material-symbols-outlined text-sm">close</span></button>
+  </div>
+  <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-2"></div>
+  <div class="px-6 py-6 border-t border-[var(--outline-variant)]/20 space-y-3">
+    <div class="flex justify-between"><span class="text-[10px] uppercase tracking-widest font-bold text-[var(--on-surface-muted)]">Total</span><span id="cart-total" class="hl text-2xl font-bold">KSh 0</span></div>
+    <a href="checkout.html" class="w-full bg-[var(--primary)] text-[var(--on-primary)] py-4 rounded-full font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2">Checkout with M-Pesa</a>
+    <button onclick="WhatsApp.cartOrder(Cart.get())" class="wa-btn w-full py-4 rounded-full font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2">Order via WhatsApp</button>
+  </div>
+</div>
+
+<nav class="fixed top-0 w-full z-50 bg-[var(--bg)]/80 backdrop-blur-xl shadow-sm">
+  <div class="flex justify-between items-center px-6 md:px-10 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="hl text-3xl font-black italic text-[var(--primary)] tracking-tighter">rosèlu</a>
+    <div class="hidden md:flex gap-8 hl font-light"><a href="catalog.html" class="hover:text-[var(--primary)] transition-colors">Shop</a><a href="catalog.html" class="hover:text-[var(--primary)] transition-colors">Vintage</a></div>
+    <div class="flex items-center gap-3">
+      <button onclick="DarkMode.toggle()" class="w-9 h-9 rounded-full bg-[var(--surface-low)] flex items-center justify-center"><span class="material-symbols-outlined dark-toggle-icon text-sm">dark_mode</span></button>
+      <a href="wishlist.html" class="relative"><span class="material-symbols-outlined text-[var(--primary)]" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">favorite</span><span class="wishlist-badge absolute -top-1 -right-1 w-4 h-4 bg-[var(--tertiary)] text-white text-[9px] font-bold rounded-full items-center justify-center hidden"></span></a>
+      <button onclick="Cart.openDrawer()" class="relative"><span class="material-symbols-outlined text-[var(--primary)]">shopping_bag</span><span class="cart-badge absolute -top-1 -right-1 w-4 h-4 bg-[var(--primary)] text-white text-[9px] font-bold rounded-full items-center justify-center hidden"></span></button>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-32 pb-20 px-6 md:px-10 max-w-7xl mx-auto">
+  <div class="mb-12">
+    <p class="text-[11px] uppercase tracking-[0.25em] font-bold text-[var(--tertiary)] mb-2">Saved Items</p>
+    <h1 class="hl text-6xl font-black italic text-[var(--primary)]">Your Wishlist</h1>
+  </div>
+  <div id="wishlist-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-14"></div>
+  <div id="wishlist-empty" class="hidden flex flex-col items-center justify-center py-32 text-center">
+    <span class="material-symbols-outlined text-6xl text-[var(--on-surface-muted)] opacity-20 mb-4">favorite</span>
+    <p class="hl text-3xl font-bold text-[var(--on-surface)] mb-3">Nothing saved yet</p>
+    <p class="text-[var(--on-surface-muted)] mb-8">Heart a frame from the catalog to save it here.</p>
+    <a href="catalog.html" class="bg-[var(--primary)] text-[var(--on-primary)] px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-[var(--primary-dim)] transition-all">Browse Collection</a>
+  </div>
+</main>
+
+<footer class="bg-[var(--surface-low)] rounded-t-3xl mt-10">
+  <div class="max-w-7xl mx-auto px-10 py-12 flex justify-between items-center">
+    <div class="hl text-xl italic font-bold text-[var(--primary)]">rosèlu</div>
+    <p class="text-[10px] uppercase tracking-widest text-[var(--on-surface-muted)]">© 2024 rosèlu. Handcrafted in Nairobi.</p>
+  </div>
+</footer>
+
+<script src="roselu.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const ids = Wishlist.get();
+  const grid = document.getElementById('wishlist-grid');
+  const empty = document.getElementById('wishlist-empty');
+  if (ids.length === 0) { grid.classList.add('hidden'); empty.classList.remove('hidden'); empty.classList.add('flex'); return; }
+  ids.forEach(id => {
+    const p = PRODUCTS.find(x => x.id === id);
+    if (!p) return;
+    grid.innerHTML += `
+      <div class="product-card group relative">
+        <div class="overflow-hidden rounded-xl aspect-[3/4] mb-5 relative bg-[var(--surface-low)]">
+          <img src="${p.img}" class="product-img w-full h-full object-cover" alt="${p.name}"/>
+          ${p.stock <= 2 ? `<div class="absolute bottom-3 left-3"><span class="bg-[var(--primary)] text-[var(--on-primary)] px-3 py-1 rounded-full text-[10px] font-bold">Only ${p.stock} left</span></div>` : ''}
+          <button data-wishlist-id="${p.id}" onclick="Wishlist.toggle(${p.id}); this.closest('.product-card').remove(); Wishlist.updateHearts(); if(document.querySelectorAll('.product-card').length===0){document.getElementById('wishlist-grid').classList.add('hidden');document.getElementById('wishlist-empty').classList.remove('hidden');document.getElementById('wishlist-empty').classList.add('flex');}" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/80 backdrop-blur flex items-center justify-center hover:scale-110 transition-transform" style="color:var(--primary)"><span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24">favorite</span></button>
+        </div>
+        <h4 class="hl text-xl font-bold text-[var(--on-surface)] mb-1">${p.name}</h4>
+        <p class="text-sm text-[var(--on-surface-muted)] mb-3">${p.sub}</p>
+        <div class="flex gap-2">
+          <button onclick="Cart.add(${p.id})" class="flex-1 bg-[var(--primary)] text-[var(--on-primary)] py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[var(--primary-dim)] transition-all">Add to Cart</button>
+          <button onclick="WhatsApp.order('${p.name}', ${p.price})" class="wa-btn px-4 py-3 rounded-full font-bold text-xs uppercase tracking-widest">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </button>
+        </div>
+        <p class="font-bold text-[var(--primary)] mt-2">KSh ${p.price.toLocaleString()}</p>
+      </div>`;
+  });
+  Wishlist.updateHearts();
+});
+</script>
+</body>
+</html>

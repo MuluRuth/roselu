@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>rosèlu — Blossom Pink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:"#bd0050","primary-dim":"#a70046","primary-container":"#ffa9b9","on-primary":"#fff7f7","on-primary-container":"#7d0032",secondary:"#974362","secondary-container":"#ffd9e2","on-secondary":"#fff7f7",tertiary:"#8d34b4","tertiary-container":"#e49eff","on-tertiary":"#fff7fc",background:"#fff8f7",surface:"#fff8f7","surface-container-lowest":"#ffffff","surface-container-low":"#fff0f0","surface-container":"#ffe9e8","surface-container-high":"#ffe1e1","surface-container-highest":"#ffdad9","on-surface":"#532426","on-surface-variant":"#884f51","on-background":"#532426",outline:"#a86a6b","outline-variant":"#e6a0a1"},fontFamily:{headline:["Noto Serif"],body:["Plus Jakarta Sans"],label:["Plus Jakarta Sans"]},borderRadius:{DEFAULT:"1rem",lg:"2rem",xl:"3rem",full:"9999px"}}}}
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff8f7;color:#532426;}
+  .hl{font-family:'Noto Serif',serif;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  .fade-up{animation:fadeUp 0.7s ease forwards;}
+  .thumb{transition:all 0.2s;cursor:pointer;filter:grayscale(0.5);}
+  .thumb:hover,.thumb.active{filter:grayscale(0);outline:2px solid #bd0050;outline-offset:2px;}
+  .color-btn{transition:all 0.2s;cursor:pointer;}
+  .color-btn.active{outline:2px solid #bd0050;outline-offset:3px;}
+</style>
+</head>
+<body>
+<nav class="fixed top-0 w-full z-50 bg-[#fff8f7]/80 backdrop-blur-xl shadow-sm shadow-[#532426]/5">
+  <div class="flex justify-between items-center px-6 md:px-10 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="text-3xl font-black italic text-primary tracking-tighter hl">rosèlu</a>
+    <div class="hidden md:flex gap-8 hl font-light tracking-tight">
+      <a href="catalog.html" class="text-on-surface hover:text-primary transition-colors">Shop</a>
+      <a href="catalog.html" class="text-on-surface hover:text-primary transition-colors">Vintage</a>
+      <a href="index.html#about" class="text-on-surface hover:text-primary transition-colors">About</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="hidden lg:flex items-center bg-surface-container-low px-4 py-2 rounded-full gap-2">
+        <span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+        <input class="bg-transparent border-none focus:ring-0 text-sm w-40 outline-none" placeholder="Search vintage frames..." type="text"/>
+      </div>
+      <a href="checkout.html"><span class="material-symbols-outlined text-primary hover:scale-110 transition-transform cursor-pointer">shopping_bag</span></a>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+  <!-- Breadcrumb -->
+  <nav class="flex gap-2 text-[10px] uppercase tracking-[0.2em] text-on-surface-variant/60 mb-10">
+    <a href="index.html" class="hover:text-primary transition-colors">Shop</a><span>/</span>
+    <a href="catalog.html" class="hover:text-primary transition-colors">Eyewear</a><span>/</span>
+    <span class="text-on-surface">Vintage Series</span>
+  </nav>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+    <!-- Images -->
+    <div class="lg:col-span-7 space-y-6 fade-up">
+      <div class="overflow-hidden rounded-2xl bg-surface-container-low">
+        <img id="main-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMnpYEG0EvCbYDS5aeHiA1XcZDkhgevN6XJeF06uaZf6uBHIHbT0uGd6dn6cY6e36T4qHwad7EGbGQZZRIWNT2qwwMJNKZxGAUSfd3mBT-6ZhKH3q6nF3sAAEeJ3xnLJC5QSvZqmsrCHArfL_TabN3H12UhsL7_xvv94g4XBQNN3vVK_Pkq0ef_txUw3lgXk91Y5NlmyWhxigNK9rBCV3MnugifFImJMmuo7VX4aN2-0nePbs-niq6KTzaAOuexugMgzyIF9jNMMl0" class="w-full aspect-[4/5] object-cover hover:scale-105 transition-transform duration-700" alt="Blossom Pink"/>
+      </div>
+      <div class="flex gap-4">
+        <div class="thumb active w-1/3 aspect-square rounded-xl overflow-hidden" onclick="switchImg(this, 'https://lh3.googleusercontent.com/aida-public/AB6AXuAT59ZyGc09YdT13fkHV5vG1N85LBR1jX1sHwRuvxFqCbIxBs1B221tfYPf_zt9yJR4fm-23tyeHmlDxHTJJh_XZc3WvaA0uOwFsD7WojUAorWolgnbZAlfVdjtEzqPDjeZJyNZfVmW1zDMXMm9NUA3rZqn33_n1tOsCcPK3WjmNMGxRVAceeGe0poe7w5qZXdeCW_j_SBuUr9vlEjYyljNO2hThMMCyC0L6MTkgVbdSIF8V6RadpcGtkmtLA9X0vZv9VecoEiop96t')">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT59ZyGc09YdT13fkHV5vG1N85LBR1jX1sHwRuvxFqCbIxBs1B221tfYPf_zt9yJR4fm-23tyeHmlDxHTJJh_XZc3WvaA0uOwFsD7WojUAorWolgnbZAlfVdjtEzqPDjeZJyNZfVmW1zDMXMm9NUA3rZqn33_n1tOsCcPK3WjmNMGxRVAceeGe0poe7w5qZXdeCW_j_SBuUr9vlEjYyljNO2hThMMCyC0L6MTkgVbdSIF8V6RadpcGtkmtLA9X0vZv9VecoEiop96t" class="w-full h-full object-cover" alt="detail"/>
+        </div>
+        <div class="w-2/3 aspect-[2/1] rounded-xl bg-surface-container flex items-center justify-center p-8">
+          <p class="hl italic text-xl text-on-surface-variant text-center leading-relaxed">"A love letter to 70s Nairobi street style, reimagined for the modern muse."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details -->
+    <div class="lg:col-span-5 lg:sticky lg:top-32 space-y-8 fade-up">
+      <div>
+        <h1 class="hl text-6xl font-light leading-tight text-on-surface mb-2">
+          Blossom <span class="italic font-black text-primary">Pink</span>
+        </h1>
+        <p class="text-on-surface-variant text-lg leading-relaxed">Hand-curated and restored to perfection. Oversized frames with a translucent blossom hue, capturing the soft glow of a Nairobi sunrise. Lightweight acetate with UV-protective lenses.</p>
+      </div>
+
+      <!-- Price -->
+      <div class="flex items-baseline gap-3">
+        <span class="text-4xl font-bold text-on-surface hl">KSh 14,500</span>
+        <span class="text-sm text-on-surface-variant line-through">KSh 18,000</span>
+        <span class="text-xs bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-bold">Save 20%</span>
+      </div>
+
+      <!-- Colors -->
+      <div>
+        <h3 class="font-label text-xs font-bold uppercase tracking-widest text-on-surface mb-4">Select Colorway</h3>
+        <div class="flex gap-5">
+          <button class="color-btn active flex flex-col items-center gap-2" onclick="selectColor(this,'Pink')">
+            <div class="w-12 h-12 rounded-full bg-[#ffa9b9]"></div>
+            <span class="text-[10px] font-bold uppercase text-primary">Pink</span>
+          </button>
+          <button class="color-btn flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity" onclick="selectColor(this,'Purple')">
+            <div class="w-12 h-12 rounded-full bg-[#8d34b4]"></div>
+            <span class="text-[10px] font-bold uppercase text-on-surface-variant">Purple</span>
+          </button>
+          <button class="color-btn flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity" onclick="selectColor(this,'Tortoise')">
+            <div class="w-12 h-12 rounded-full bg-[#532426]"></div>
+            <span class="text-[10px] font-bold uppercase text-on-surface-variant">Tortoise</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="space-y-4 pt-4 border-t border-outline-variant/20">
+        <a href="checkout.html" class="w-full bg-primary text-on-primary py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-primary-dim hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-3">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Add to Cart — KSh 14,500
+        </a>
+        <div class="flex items-center justify-center gap-3 py-3 px-6 bg-surface-container-low rounded-full">
+          <span class="material-symbols-outlined text-tertiary text-lg">electric_moped</span>
+          <span class="text-xs font-bold text-on-surface-variant">Fast Bodaboda Delivery · Nairobi</span>
+        </div>
+      </div>
+
+      <!-- Value props -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-xl">
+          <span class="material-symbols-outlined text-primary">verified</span>
+          <span class="text-xs font-bold uppercase leading-tight">Authentic Vintage</span>
+        </div>
+        <div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-xl">
+          <span class="material-symbols-outlined text-primary">eco</span>
+          <span class="text-xs font-bold uppercase leading-tight">Eco-Acetate</span>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <div class="space-y-1">
+        <details class="group border-b border-outline-variant/20 py-4">
+          <summary class="flex justify-between items-center cursor-pointer list-none font-bold text-xs uppercase tracking-widest">
+            Sizing & Fit
+            <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="pt-4 text-sm text-on-surface-variant leading-relaxed">Lens Width: 54mm · Bridge: 18mm · Temple: 145mm. Best suited for oval and heart-shaped faces.</div>
+        </details>
+        <details class="group border-b border-outline-variant/20 py-4">
+          <summary class="flex justify-between items-center cursor-pointer list-none font-bold text-xs uppercase tracking-widest">
+            Care Guide
+            <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="pt-4 text-sm text-on-surface-variant leading-relaxed">Includes a vegan leather hard case and a recycled microfiber cleaning cloth. Avoid prolonged heat exposure.</div>
+        </details>
+        <details class="group border-b border-outline-variant/20 py-4">
+          <summary class="flex justify-between items-center cursor-pointer list-none font-bold text-xs uppercase tracking-widest">
+            Delivery & Returns
+            <span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <div class="pt-4 text-sm text-on-surface-variant leading-relaxed">Same-day Bodaboda delivery within Nairobi. Free returns within 7 days of delivery if unused.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-surface-container-low rounded-t-3xl mt-10">
+  <div class="max-w-7xl mx-auto px-10 py-14 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="hl text-xl italic font-bold text-primary">rosèlu</div>
+    <p class="text-[10px] uppercase tracking-widest text-on-surface-variant">© 2024 rosèlu. Handcrafted in Nairobi.</p>
+  </div>
+</footer>
+
+<script>
+function switchImg(el, src) {
+  document.getElementById('main-img').src = src;
+  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+function selectColor(el, name) {
+  document.querySelectorAll('.color-btn').forEach(b => { b.classList.remove('active'); b.classList.add('opacity-60'); });
+  el.classList.add('active'); el.classList.remove('opacity-60');
+}
+</script>
+</body>
+</html>

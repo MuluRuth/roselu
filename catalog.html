@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>rosèlu | The Archive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: { extend: { colors: { primary:"#bd0050","primary-dim":"#a70046","primary-container":"#ffa9b9","on-primary":"#fff7f7","on-primary-container":"#7d0032",secondary:"#974362","secondary-container":"#ffd9e2","on-secondary":"#fff7f7",tertiary:"#8d34b4","tertiary-container":"#e49eff","on-tertiary":"#fff7fc",background:"#fff8f7",surface:"#fff8f7","surface-container-lowest":"#ffffff","surface-container-low":"#fff0f0","surface-container":"#ffe9e8","surface-container-high":"#ffe1e1","surface-container-highest":"#ffdad9","on-surface":"#532426","on-surface-variant":"#884f51","on-background":"#532426",outline:"#a86a6b","outline-variant":"#e6a0a1" }, fontFamily:{ headline:["Noto Serif"],body:["Plus Jakarta Sans"],label:["Plus Jakarta Sans"] }, borderRadius:{ DEFAULT:"1rem",lg:"2rem",xl:"3rem",full:"9999px" } } }
+}
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff8f7;color:#532426;}
+  .hl{font-family:'Noto Serif',serif;}
+  .product-img{transition:transform 0.7s ease;}
+  .product-card:hover .product-img{transform:scale(1.08);}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .fade-up{animation:fadeUp 0.6s ease forwards;}
+</style>
+</head>
+<body>
+<nav class="fixed top-0 w-full z-50 bg-[#fff8f7]/80 backdrop-blur-xl shadow-sm shadow-[#532426]/5">
+  <div class="flex justify-between items-center px-6 md:px-10 py-4 max-w-7xl mx-auto">
+    <a href="index.html" class="text-3xl font-black italic text-primary tracking-tighter hl">rosèlu</a>
+    <div class="hidden md:flex gap-8 hl font-light tracking-tight">
+      <a href="catalog.html" class="text-primary border-b-2 border-primary pb-1 font-bold">Shop</a>
+      <a href="catalog.html" class="text-on-surface hover:text-primary transition-colors">Vintage</a>
+      <a href="index.html#about" class="text-on-surface hover:text-primary transition-colors">About</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="material-symbols-outlined text-primary hover:scale-110 transition-transform cursor-pointer">search</span>
+      <a href="checkout.html"><span class="material-symbols-outlined text-primary hover:scale-110 transition-transform cursor-pointer">shopping_bag</span></a>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-32 pb-20 px-6 md:px-10 max-w-7xl mx-auto">
+  <!-- Header -->
+  <header class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+    <div>
+      <p class="text-[11px] uppercase tracking-[0.25em] font-bold text-tertiary mb-3">Curated Collection</p>
+      <h1 class="hl text-7xl md:text-9xl font-black italic tracking-tighter text-primary leading-none">The Archive</h1>
+      <p class="text-lg text-on-surface-variant max-w-md mt-4 leading-relaxed">Each piece tells a story of sun-drenched afternoons and Nairobi's vintage soul.</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <button onclick="filterProducts('all')" id="btn-all" class="px-6 py-2 rounded-full text-xs uppercase tracking-widest font-bold bg-primary text-on-primary shadow-lg shadow-primary/20 transition-all">All Frames</button>
+      <button onclick="filterProducts('vintage')" id="btn-vintage" class="px-6 py-2 rounded-full border border-outline/20 text-xs uppercase tracking-widest bg-white text-on-surface hover:bg-surface-container transition-all">Vintage</button>
+      <button onclick="filterProducts('modern')" id="btn-modern" class="px-6 py-2 rounded-full border border-outline/20 text-xs uppercase tracking-widest bg-white text-on-surface hover:bg-surface-container transition-all">Modern</button>
+    </div>
+  </header>
+
+  <!-- Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20" id="product-grid">
+
+    <a href="product.html" class="product-card group relative fade-up" data-cat="vintage">
+      <div class="relative overflow-hidden rounded-xl aspect-[4/5] bg-surface-container-low mb-6">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjpoef8Bq8DD3wf_EOmu6d4KO2WeALgIdpmPzCXTDNNF-CyKJype1ZJE48OFwwLARISLeYJblGl740er4hT2cATfTJ8bgcY9dD17AVw6rdebQCH3_zJXndHXFWoxYxPGUfg1LnW1IgGt8L9VEqbmEu_ohtK681po5jXXLew_t2d0aGJ9Ctpt-RCVgVb2sPvTEvwmIPgBWkgMWQE_eic96fwcOBTMNB1GU9VDn2A86_VU6LwCZGVIoxjqD58x5XqvYEHn88dCyt_EBL" class="product-img w-full h-full object-cover" alt="Mombasa Rose"/>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-sm">favorite</span></button></div>
+        <div class="absolute bottom-4 left-4"><span class="bg-tertiary text-on-tertiary px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">New Arrival</span></div>
+      </div>
+      <div class="flex justify-between items-start">
+        <div><h3 class="hl text-2xl font-bold mb-1">Mombasa Rose</h3><p class="text-sm text-on-surface-variant italic">1970s Acetate Revival</p></div>
+        <span class="font-bold text-lg text-primary">KSh 4,500</span>
+      </div>
+    </a>
+
+    <a href="product.html" class="product-card group relative lg:mt-12 fade-up" data-cat="modern">
+      <div class="relative overflow-hidden rounded-xl aspect-[4/5] bg-surface-container-low mb-6">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_RRzqJEdJ9oVU6UsGplCl-WcrliOpvnjOp0A8_iSOdJyF7qrPAeUXkXfvuInm6hsTWZwoVMjfnaDCCwQyp6ng5B-xVKXevahfpltUBoXDMdib90aQ6OABYkfZ2SyFduVkHbPrqcyij20wTy9wa3jrs-vOLH1dtAxXvdD-PLs7e6UUE00zVHUdzoDwotpKRRR1A_qGB1Ve6Gj5FdIsGbxbpxskPlQrTmqM0Z5mCrSKPeqtwf8ZvldWt4R8n4jZreIwODDuI4omoA4w" class="product-img w-full h-full object-cover" alt="Lilac Nights"/>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-sm">favorite</span></button></div>
+      </div>
+      <div class="flex justify-between items-start">
+        <div><h3 class="hl text-2xl font-bold mb-1">Lilac Nights</h3><p class="text-sm text-on-surface-variant italic">Cat-eye Geometric</p></div>
+        <span class="font-bold text-lg text-primary">KSh 5,200</span>
+      </div>
+    </a>
+
+    <a href="product.html" class="product-card group relative fade-up" data-cat="vintage">
+      <div class="relative overflow-hidden rounded-xl aspect-[4/5] bg-surface-container-low mb-6">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXhxB4RolgZxz1BjJqnOOR1zv9GgE8hovJkJMzaYZsp6j_-74Ak92tFIStx4qm-pTHB3qNzr90xSjx6h6BvO4QVyxrPYncv0ZnYwnXf284Jug8pJeabGza58vbXumsj2AebMHGouzVDhFLaMJ-UXs9Y4R0d4F4wpspG5jdDrV49xAmotfbF2icTcbxCYymR-zUxzaZFIAzqGpi-WND2Ce2Ct08Nc9udr0GjrU-7Px2DqrLHU-0xuvec_mVaGE3l6iPgIrw1XGYILTm" class="product-img w-full h-full object-cover" alt="Kilimani Retro"/>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-sm">favorite</span></button></div>
+        <div class="absolute bottom-4 left-4"><span class="bg-primary-container text-on-primary-container px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Archive Piece</span></div>
+      </div>
+      <div class="flex justify-between items-start">
+        <div><h3 class="hl text-2xl font-bold mb-1">Kilimani Retro</h3><p class="text-sm text-on-surface-variant italic">Translucent Frameless</p></div>
+        <span class="font-bold text-lg text-primary">KSh 3,800</span>
+      </div>
+    </a>
+
+    <a href="product.html" class="product-card group relative lg:-mt-12 fade-up" data-cat="vintage">
+      <div class="relative overflow-hidden rounded-xl aspect-[4/5] bg-surface-container-low mb-6">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz13QtHXxRZD7OaqkUGEVbSHdluwXS0OLuROCRu2_7Vo_7wldgvC1xeMJZFUOGnZWo4aA3m6Oyj2CK9wplCmXyBMF3NnHK9HOM1hnMCgc_xN0zDTO9kYY9vfhQbSuvARqOWXko45OISGpoMI44F4FMWMUJszD_lyHTwHPWJPOiFdzIWw_c4cM_S9DiYV-pkZuZwcOH0gTtBmdnHpDohAbtOdZxAIcxLucJ7oYtc3jWnFDFAmZUcXUkM_qGoIy6RsEvtwjCj0yvgEUJ" class="product-img w-full h-full object-cover" alt="Sunset Valley"/>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-sm">favorite</span></button></div>
+      </div>
+      <div class="flex justify-between items-start">
+        <div><h3 class="hl text-2xl font-bold mb-1">Sunset Valley</h3><p class="text-sm text-on-surface-variant italic">Gold-rimmed Gradient</p></div>
+        <span class="font-bold text-lg text-primary">KSh 6,000</span>
+      </div>
+    </a>
+
+    <a href="product.html" class="product-card group relative fade-up" data-cat="modern">
+      <div class="relative overflow-hidden rounded-xl aspect-[4/5] bg-surface-container-low mb-6">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADDLtKUFfX7xdGt2ps1G818Clx3DI7sWqOyFMgREMmT215p-WLQ7Us2_rv-aO-iEWX7cGDREwquHhqL1c3aWIFw3yatwhyel2Wa8aPWjppPJcQaMvcai6NAOf4MluKZWecqYM8MdaYvMI0KwWP9l2A2qQKuIfpIoSJmPQTh2UF1KFyfw468rV5pbZv17DGVdGC6caOfI0pwmnqkoORaYzeCJG_QIoUb8Ciik3GDUJTwHsNd4Zrkm9C1YQsmiBtD9FDf_i7i2EuNUFB" class="product-img w-full h-full object-cover" alt="Diani Candy"/>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-sm">favorite</span></button></div>
+      </div>
+      <div class="flex justify-between items-start">
+        <div><h3 class="hl text-2xl font-bold mb-1">Diani Candy</h3><p class="text-sm text-on-surface-variant italic">Chunky Resin Pink</p></div>
+        <span class="font-bold text-lg text-primary">KSh 4,200</span>
+      </div>
+    </a>
+
+    <a href="product.html" class="product-card group relative lg:mt-12 fade-up" data-cat="vintage">
+      <div class="relative overflow-hidden rounded-xl aspect-[4/5] bg-surface-container-low mb-6">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5XfMohLWKW2sBzkJXvRyTgz96tFptzM8d-L3QtKmTiRuwt6MWHfaYToxesvTITamiiDfa2CvkmtNHhHx91ZokUJgi9kfDHw1SyNtCaUgi-UPdEF8YuLtnhImXYzt8kVeAyI-ZCc8Dwag01dvbIHuV8c1zmMk6FB0QK3X7wSEfSTw5gywrRMIQSeA0oXmQJVF5DCoDSQy68vntdDf9IWYO4KFAwMI7P7rNEX_LV-WXQHApTz-to4W-KLJdCqMZ8UN64cqvf29_-d1A" class="product-img w-full h-full object-cover" alt="Amethyst Muse"/>
+        <div class="absolute top-4 right-4"><button class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-sm">favorite</span></button></div>
+      </div>
+      <div class="flex justify-between items-start">
+        <div><h3 class="hl text-2xl font-bold mb-1">Amethyst Muse</h3><p class="text-sm text-on-surface-variant italic">Deep Purple Aviator</p></div>
+        <span class="font-bold text-lg text-primary">KSh 5,500</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- Pagination -->
+  <div class="mt-24 flex justify-center items-center gap-6">
+    <button class="w-12 h-12 rounded-full border border-outline/20 flex items-center justify-center hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+    <span class="font-label text-sm font-bold uppercase tracking-widest">Page 01 of 04</span>
+    <button class="w-12 h-12 rounded-full border border-outline/20 flex items-center justify-center hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+  </div>
+</main>
+
+<footer class="bg-surface-container-low rounded-t-3xl mt-10">
+  <div class="max-w-7xl mx-auto px-10 py-14 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="hl text-xl italic font-bold text-primary">rosèlu</div>
+    <div class="flex flex-wrap gap-8 text-[10px] uppercase tracking-widest text-on-surface-variant">
+      <a href="#" class="hover:text-tertiary transition-colors">Shipping & Bodaboda</a>
+      <a href="#" class="hover:text-tertiary transition-colors">M-Pesa Info</a>
+      <a href="#" class="hover:text-tertiary transition-colors">Privacy</a>
+    </div>
+    <p class="text-[10px] uppercase tracking-widest text-on-surface-variant">© 2024 rosèlu. Handcrafted in Nairobi.</p>
+  </div>
+</footer>
+
+<script>
+function filterProducts(cat) {
+  const cards = document.querySelectorAll('[data-cat]');
+  const btns = { all: document.getElementById('btn-all'), vintage: document.getElementById('btn-vintage'), modern: document.getElementById('btn-modern') };
+  Object.values(btns).forEach(b => { b.classList.remove('bg-primary','text-on-primary','shadow-lg'); b.classList.add('bg-white','text-on-surface','border','border-outline/20'); });
+  btns[cat].classList.add('bg-primary','text-on-primary','shadow-lg'); btns[cat].classList.remove('bg-white','text-on-surface','border','border-outline/20');
+  cards.forEach(c => { c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none'; });
+}
+</script>
+</body>
+</html>
