@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/pay",
+      "dest": "server.js"
+    },
+    {
+      "src": "/callback",
+      "dest": "server.js"
+    },
+    {
+      "src": "/status",
+      "dest": "server.js"
+    },
+    {
+      "src": "/test",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
