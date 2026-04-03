@@ -19,7 +19,7 @@ async function initiateMpesa() {
   payBtn.disabled = true;
 
   try {
-    const response = await fetch("http://localhost:3000/pay", {
+    const response = await fetch("https://roselu.vercel.app/pay", { {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -43,7 +43,7 @@ async function initiateMpesa() {
         const poll = setInterval(async () => {
           attempts++;
           try {
-            const statusRes = await fetch("http://localhost:3000/status", {
+           const statusRes = await fetch("https://roselu.vercel.app/status", { {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ checkoutRequestId: checkoutId }),
